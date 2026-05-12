@@ -10,13 +10,34 @@
 //   too_many_attempts()→ true si IP dépasse 5 échecs en 15 min
 //   clear_attempts()   → reset après login réussi
 
+// ─── Détection HTTPS ───────────────────────────────────────────────
+$isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+        || ($_SERVER['SERVER_PORT'] ?? null) == 443
+        || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https');
+
+// ─── Redirection HTTP → HTTPS en production ────────────────────────
+// Ne s'applique PAS à XAMPP local (localhost / 127.0.0.1) qui n'a pas SSL.
+$reqHost = $_SERVER['HTTP_HOST'] ?? '';
+$isLocal = ($reqHost === 'localhost' || strpos($reqHost, '127.0.0.1') !== false || strpos($reqHost, 'localhost:') === 0);
+if (!$isHttps && !$isLocal && !headers_sent()) {
+    header('Location: https://' . $reqHost . ($_SERVER['REQUEST_URI'] ?? '/'), true, 301);
+    exit;
+}
+
+// ─── Headers de sécurité ───────────────────────────────────────────
+if (!headers_sent()) {
+    header('X-Content-Type-Options: nosniff');
+    header('X-Frame-Options: SAMEORIGIN');
+    header('Referrer-Policy: strict-origin-when-cross-origin');
+    if ($isHttps) {
+        header('Strict-Transport-Security: max-age=31536000; includeSubDomains');
+    }
+}
+
 // ─── Session sécurisée ─────────────────────────────────────────────
 if (session_status() === PHP_SESSION_NONE) {
     ini_set('session.cookie_httponly', 1);
     ini_set('session.use_only_cookies', 1);
-    // Activer Secure si on est en HTTPS
-    $isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
-            || ($_SERVER['SERVER_PORT'] ?? null) == 443;
     ini_set('session.cookie_secure', $isHttps ? 1 : 0);
     ini_set('session.cookie_samesite', 'Lax');
     session_start();
