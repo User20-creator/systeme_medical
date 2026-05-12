@@ -1,0 +1,17 @@
+# ─── Force HTTPS ───────────────────────────────────────
+# Redirige toutes les requêtes HTTP vers HTTPS (Let's Encrypt fourni par InfinityFree)
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ─── Sécurité — headers ────────────────────────────────
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# ─── PHP par défaut ────────────────────────────────────
+DirectoryIndex index.php index.html
