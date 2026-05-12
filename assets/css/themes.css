@@ -1,0 +1,285 @@
+/* =========================================================
+   Thèmes du dashboard — 5 couleurs
+   Appliqué via : <body data-theme="vert|bleu|rouge|noir|blanc">
+   Variables modifiées :
+     --theme-primary       couleur principale (titres, badges, bordures actives)
+     --theme-primary-soft  version atténuée (fonds clairs)
+     --theme-primary-dark  version foncée (hover)
+     --theme-accent        couleur d'accent
+     --theme-bg            fond principal du dashboard
+     --theme-surface       fond des cartes
+     --theme-ink           couleur du texte
+     --theme-muted         couleur du texte secondaire
+     --theme-line          couleur des bordures
+   ========================================================= */
+
+/* ============ THÈME PAR DÉFAUT (Blanc — médical original) ============ */
+:root,
+body[data-theme="blanc"] {
+  --theme-primary:       #1a472a;
+  --theme-primary-soft:  rgba(26, 71, 42, .08);
+  --theme-primary-dark:  #0e2a1a;
+  --theme-accent:        #10b981;
+  --theme-bg:            #f8fafc;
+  --theme-surface:       #ffffff;
+  --theme-ink:           #0f172a;
+  --theme-muted:         #64748b;
+  --theme-line:          #e2e8f0;
+  --theme-sidebar-bg:    #ffffff;
+  --theme-sidebar-text:  #0f172a;
+  --theme-topbar-bg:     #ffffff;
+}
+
+/* ============ THÈME VERT (forêt médicale) ============ */
+body[data-theme="vert"] {
+  --theme-primary:       #15803d;
+  --theme-primary-soft:  rgba(21, 128, 61, .1);
+  --theme-primary-dark:  #14532d;
+  --theme-accent:        #22c55e;
+  --theme-bg:            #f0fdf4;
+  --theme-surface:       #ffffff;
+  --theme-ink:           #0f1f12;
+  --theme-muted:         #4d6b56;
+  --theme-line:          #d1fae5;
+  --theme-sidebar-bg:    #ecfdf5;
+  --theme-sidebar-text:  #14532d;
+  --theme-topbar-bg:     #ffffff;
+}
+
+/* ============ THÈME BLEU (clinique apaisée) ============ */
+body[data-theme="bleu"] {
+  --theme-primary:       #0369a1;
+  --theme-primary-soft:  rgba(14, 165, 233, .1);
+  --theme-primary-dark:  #0c4a6e;
+  --theme-accent:        #38bdf8;
+  --theme-bg:            #f0f9ff;
+  --theme-surface:       #ffffff;
+  --theme-ink:           #0c1929;
+  --theme-muted:         #475569;
+  --theme-line:          #bae6fd;
+  --theme-sidebar-bg:    #e0f2fe;
+  --theme-sidebar-text:  #0c4a6e;
+  --theme-topbar-bg:     #ffffff;
+}
+
+/* ============ THÈME ROUGE (urgence) ============ */
+body[data-theme="rouge"] {
+  --theme-primary:       #b91c1c;
+  --theme-primary-soft:  rgba(239, 68, 68, .1);
+  --theme-primary-dark:  #7f1d1d;
+  --theme-accent:        #ef4444;
+  --theme-bg:            #fef2f2;
+  --theme-surface:       #ffffff;
+  --theme-ink:           #1f0808;
+  --theme-muted:         #6b3030;
+  --theme-line:          #fecaca;
+  --theme-sidebar-bg:    #fee2e2;
+  --theme-sidebar-text:  #7f1d1d;
+  --theme-topbar-bg:     #ffffff;
+}
+
+/* ============ THÈME NOIR (mode sombre) ============ */
+body[data-theme="noir"] {
+  --theme-primary:       #34d399;
+  --theme-primary-soft:  rgba(52, 211, 153, .12);
+  --theme-primary-dark:  #10b981;
+  --theme-accent:        #38bdf8;
+  --theme-bg:            #0a0e1a;
+  --theme-surface:       #131826;
+  --theme-ink:           #f1f5f9;
+  --theme-muted:         #94a3b8;
+  --theme-line:          #1e293b;
+  --theme-sidebar-bg:    #0f1322;
+  --theme-sidebar-text:  #f1f5f9;
+  --theme-topbar-bg:     #131826;
+}
+
+/* =========================================================
+   Application des variables aux composants existants.
+   On surcharge les variables CSS globales utilisées par
+   app.css et dashboard.css quand un thème est posé.
+   ========================================================= */
+body[data-theme] {
+  background: var(--theme-bg) !important;
+  color: var(--theme-ink);
+}
+
+body[data-theme] .dash-shell { background: var(--theme-bg); }
+
+body[data-theme] .sidebar {
+  background: var(--theme-sidebar-bg) !important;
+  color: var(--theme-sidebar-text);
+  border-right-color: var(--theme-line);
+}
+body[data-theme] .sidebar-link { color: var(--theme-sidebar-text); }
+body[data-theme] .sidebar-link:hover {
+  background: var(--theme-primary-soft);
+  color: var(--theme-primary);
+}
+body[data-theme] .sidebar-link.active {
+  background: var(--theme-primary);
+  color: white;
+}
+body[data-theme] .sidebar-group-title { color: var(--theme-muted); }
+body[data-theme] .sidebar-user-name   { color: var(--theme-sidebar-text); }
+body[data-theme] .sidebar-user-role   { color: var(--theme-muted); }
+body[data-theme] .sidebar-logo-text   { color: var(--theme-sidebar-text); }
+body[data-theme] .sidebar-logo-text small { color: var(--theme-muted); }
+
+body[data-theme] .topbar {
+  background: var(--theme-topbar-bg);
+  border-bottom-color: var(--theme-line);
+}
+body[data-theme] .page-title-wrap h1 { color: var(--theme-ink); }
+body[data-theme] .breadcrumb         { color: var(--theme-muted); }
+
+body[data-theme] .dash-card,
+body[data-theme] .stat-card,
+body[data-theme] .item-row,
+body[data-theme] .form-card {
+  background: var(--theme-surface);
+  border-color: var(--theme-line);
+  color: var(--theme-ink);
+}
+
+body[data-theme] .dash-card-head h3,
+body[data-theme] .stat-card-value,
+body[data-theme] .item-body h4,
+body[data-theme] .form-head h2,
+body[data-theme] .empty h4 {
+  color: var(--theme-ink);
+}
+body[data-theme] .dash-card-head p,
+body[data-theme] .stat-card-label,
+body[data-theme] .item-body p,
+body[data-theme] .item-body small,
+body[data-theme] .form-head p,
+body[data-theme] .empty p {
+  color: var(--theme-muted);
+}
+
+/* Quick actions et listes secondaires */
+body[data-theme] .quick-action,
+body[data-theme] .schedule-body {
+  background: var(--theme-bg);
+}
+body[data-theme] .quick-action:hover {
+  background: var(--theme-surface);
+  border-color: var(--theme-line);
+}
+body[data-theme] .quick-action strong { color: var(--theme-ink); }
+body[data-theme] .quick-action span   { color: var(--theme-muted); }
+
+/* Mode sombre : ajustements supplémentaires pour la lisibilité */
+body[data-theme="noir"] {
+  color-scheme: dark;
+}
+body[data-theme="noir"] .input-shell,
+body[data-theme="noir"] .accueil-motif,
+body[data-theme="noir"] .form-actions {
+  background: #0a0e1a;
+  border-color: #1e293b;
+}
+body[data-theme="noir"] .input-shell input,
+body[data-theme="noir"] .input-shell select,
+body[data-theme="noir"] .input-shell textarea {
+  color: var(--theme-ink);
+}
+body[data-theme="noir"] .input-shell input::placeholder,
+body[data-theme="noir"] .input-shell textarea::placeholder {
+  color: #64748b;
+}
+body[data-theme="noir"] .accueil-card,
+body[data-theme="noir"] .doctor-card,
+body[data-theme="noir"] .credentials-table,
+body[data-theme="noir"] .hash-block {
+  background: var(--theme-surface);
+  border-color: var(--theme-line);
+}
+body[data-theme="noir"] .accueil-foot { border-top-color: #1e293b; }
+body[data-theme="noir"] code,
+body[data-theme="noir"] .mono { color: var(--theme-accent); }
+
+/* =========================================================
+   Le widget de sélection de thème (topbar)
+   ========================================================= */
+.theme-switcher {
+  position: relative;
+  margin-right: 6px;
+}
+.theme-switcher-btn {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: var(--theme-primary-soft, rgba(26, 71, 42, .08));
+  color: var(--theme-primary, #1a472a);
+  border: none; cursor: pointer;
+  display: grid; place-items: center;
+  font-size: 14px;
+  transition: .2s;
+}
+.theme-switcher-btn:hover {
+  background: var(--theme-primary, #1a472a);
+  color: white;
+}
+.theme-switcher-menu {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  background: var(--theme-surface, white);
+  border: 1px solid var(--theme-line, #e2e8f0);
+  border-radius: 14px;
+  box-shadow: 0 16px 40px -16px rgba(15,23,42,.25);
+  padding: 14px;
+  min-width: 220px;
+  display: none;
+  z-index: 100;
+}
+.theme-switcher.open .theme-switcher-menu { display: block; animation: themePop .18s ease-out; }
+@keyframes themePop { from { opacity:0; transform: translateY(-4px); } to { opacity:1; transform: translateY(0); } }
+
+.theme-switcher-title {
+  font-size: 11px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .08em;
+  color: var(--theme-muted, #64748b);
+  margin-bottom: 10px;
+}
+.theme-options {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+.theme-option {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  position: relative;
+  display: grid; place-items: center;
+  transition: .2s;
+}
+.theme-option:hover { transform: scale(1.08); }
+.theme-option.active { border-color: var(--theme-primary, #1a472a); }
+.theme-option.active::after {
+  content: "✓";
+  color: white;
+  font-weight: 800;
+  font-size: 14px;
+  text-shadow: 0 1px 2px rgba(0,0,0,.4);
+}
+.theme-option[data-theme-color="blanc"] { background: linear-gradient(135deg, #ffffff, #f1f5f9); border-color: #e2e8f0; }
+.theme-option[data-theme-color="noir"]  { background: linear-gradient(135deg, #0a0e1a, #1e293b); }
+.theme-option[data-theme-color="vert"]  { background: linear-gradient(135deg, #15803d, #22c55e); }
+.theme-option[data-theme-color="bleu"]  { background: linear-gradient(135deg, #0369a1, #38bdf8); }
+.theme-option[data-theme-color="rouge"] { background: linear-gradient(135deg, #b91c1c, #ef4444); }
+
+.theme-option-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--theme-muted);
+  text-align: center;
+  margin-top: 4px;
+  font-weight: 700;
+}
+.theme-grid-with-labels {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
+}
+.theme-cell { display: flex; flex-direction: column; align-items: center; gap: 2px; }

@@ -1,0 +1,36 @@
+# ─── Claude Code local config ──────────────────────────
+.claude/
+
+# ─── Fichiers temporaires Office ───────────────────────
+~$*
+*.tmp
+
+# ─── Logs ──────────────────────────────────────────────
+*.log
+logs/
+
+# ─── Dépendances (au cas où) ───────────────────────────
+node_modules/
+vendor/
+
+# ─── OS ────────────────────────────────────────────────
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# ─── Éditeurs ──────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ─── Livrables (PDF, DOCX, PPTX, screenshots — 19 Mo) ──
+livrables/
+
+# ─── Image égarée à la racine ──────────────────────────
+681916412_1286440716955046_3465294990425420699_n.jpg
+
+# ─── Config locale avec secrets (si tu en crées une) ───
+config.local.php
+.env
+.env.local
