@@ -23,10 +23,18 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // ─── Connexion BDD ─────────────────────────────────────────────────
-$host = 'localhost';
-$dbname = 'systeme_medical';
-$username = 'root';
-$password = '';
+// Charge les credentials depuis config.local.php si présent (production),
+// sinon utilise les valeurs par défaut XAMPP (développement local).
+// config.local.php est ignoré par git — ne JAMAIS le versionner.
+$configLocal = __DIR__ . '/config.local.php';
+if (file_exists($configLocal)) {
+    require $configLocal;
+} else {
+    $host     = 'localhost';
+    $dbname   = 'systeme_medical';
+    $username = 'root';
+    $password = '';
+}
 
 try {
     $pdo = new PDO(
