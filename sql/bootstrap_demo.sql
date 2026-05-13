@@ -5,7 +5,7 @@
 --
 --  Crée :
 --   • 5 rôles (admin, medecin, docteur, infirmier, patient)
---   • 4 hôpitaux du Bénin (CNHU, CHU Parakou, Pasteur, Hôpital de Zone)
+--   • 6 hôpitaux du Bénin
 --   • 1 compte admin (email : admin@medchain.bj)
 --
 --  ⚠️ Mot de passe admin haché ci-dessous (bcrypt).
@@ -27,10 +27,12 @@ INSERT IGNORE INTO `hopitaux`
   (`nom`, `ville`, `telephone`, `email`, `code_blockchain`, `statut`,
    `nombre_lits`, `nombre_medecins`, `nombre_ambulances`, `nombre_labos`, `nombre_etudiants`, `Image`)
 VALUES
-('CNHU-HKM',         'Cotonou', '+229 21 30 11 84', 'contact@cnhu.bj',          'HOP-0x1', 'actif', 350, 80, 8, 4, 120, 'images/cnhu.jpeg'),
-('CHU de Parakou',   'Parakou', '+229 23 61 13 30', 'contact@chu-parakou.bj',   'HOP-0x2', 'actif', 200, 45, 5, 3,  80, 'images/cnhu_parakou.jpg'),
-('Institut Pasteur', 'Cotonou', '+229 21 33 36 91', 'contact@pasteur.bj',       'HOP-0x3', 'actif',  80, 20, 2, 2,  30, 'images/pasteur.jpg'),
-('Hôpital de Zone',  'Calavi',  '+229 21 35 00 00', 'contact@zone-calavi.bj',   'HOP-0x4', 'actif', 120, 30, 3, 2,  50, 'images/zone.jpg');
+('CNHU-HKM',                       'Cotonou',   '+229 21 30 11 84', 'contact@cnhu.bj',           'HOP-0x1', 'actif', 350, 80, 8, 4, 120, 'images/cnhu.jpeg'),
+('CHU de Parakou',                 'Parakou',   '+229 23 61 13 30', 'contact@chu-parakou.bj',    'HOP-0x2', 'actif', 200, 45, 5, 3,  80, 'images/cnhu_parakou.jpg'),
+('Institut Pasteur',               'Cotonou',   '+229 21 33 36 91', 'contact@pasteur.bj',        'HOP-0x3', 'actif',  80, 20, 2, 2,  30, 'images/pasteur.jpg'),
+('Hôpital de Zone de Calavi',      'Calavi',    '+229 21 35 00 00', 'contact@zone-calavi.bj',    'HOP-0x4', 'actif', 120, 30, 3, 2,  50, 'images/zone.jpg'),
+('CNHU de Allada',                 'Allada',    '+229 21 37 12 00', 'contact@cnhu-allada.bj',    'HOP-0x5', 'actif', 140, 35, 4, 2,  60, 'images/cnhu.jpeg'),
+('Hôpital de Zone de Lokossa',     'Lokossa',   '+229 22 41 00 00', 'contact@zone-lokossa.bj',   'HOP-0x6', 'actif', 100, 25, 2, 1,  40, 'images/zone.jpg');
 
 -- ── 3. Admin par défaut ───────────────────────────────────────────────
 SET @admin_role_id := (SELECT id FROM `roles` WHERE `code` = 'admin' LIMIT 1);
