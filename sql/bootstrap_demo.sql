@@ -6,9 +6,12 @@
 --  Crée :
 --   • 5 rôles (admin, medecin, docteur, infirmier, patient)
 --   • 4 hôpitaux du Bénin (CNHU, CHU Parakou, Pasteur, Hôpital de Zone)
---   • 1 compte admin (admin@medchain.bj / Admin@2026)
+--   • 1 compte admin (email : admin@medchain.bj)
 --
---  Mot de passe admin pré-haché avec password_hash(PASSWORD_DEFAULT).
+--  ⚠️ Mot de passe admin haché ci-dessous (bcrypt).
+--      Le mot de passe en clair n'est PAS dans ce fichier public.
+--      Le propriétaire de l'instance le détient hors du repo.
+--      Pour le changer : UPDATE admin SET mot_de_passe = '<nouveau_hash>' WHERE email = 'admin@medchain.bj';
 -- ──────────────────────────────────────────────────────────────────────
 
 -- ── 1. Rôles ──────────────────────────────────────────────────────────
@@ -35,5 +38,5 @@ SET @admin_role_id := (SELECT id FROM `roles` WHERE `code` = 'admin' LIMIT 1);
 INSERT IGNORE INTO `admin` (`nom`, `prenom`, `email`, `mot_de_passe`, `role_id`, `statut`)
 VALUES
 ('MedChain', 'Admin', 'admin@medchain.bj',
- '$2y$10$byC8PaGqseC4EUZEKiZJ8ea5Lt2cqt2mIOJcI5ijguI41BTrp4syi',
+ '$2y$10$wwsDqeuUgUnsmoZpBsTXCeBEBXOa7AHDY6WYQivkzFkja4NxUksBm',
  @admin_role_id, 'actif');
