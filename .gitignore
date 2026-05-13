@@ -34,3 +34,7 @@ livrables/
 config.local.php
 .env
 .env.local
+
+# ─── Documents avec credentials (ne JAMAIS pousser) ────
+IDENTIFIANTS.md
+identifiants.md
