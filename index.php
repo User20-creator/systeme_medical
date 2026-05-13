@@ -7,10 +7,12 @@ require_once 'includes/hash_chain.php';
 // Récupérer les hôpitaux partenaires
 $hopitaux = [];
 $hopitauxCount = 0;
+$patientsCount = 0;
 try {
     $stmt = $pdo->query("SELECT * FROM hopitaux WHERE statut = 'actif' ORDER BY nom LIMIT 6");
     $hopitaux = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $hopitauxCount = (int) $pdo->query("SELECT COUNT(*) FROM hopitaux WHERE statut = 'actif'")->fetchColumn();
+    $patientsCount = (int) $pdo->query("SELECT COUNT(*) FROM patients")->fetchColumn();
 } catch (Exception $e) { /* silent */ }
 
 // Stats blockchain
@@ -99,12 +101,12 @@ function hopitalImage($hopital, $imageMap) {
         <!-- Trust row -->
         <div class="reveal-up" data-delay="400" style="display:flex;gap:32px;align-items:center;flex-wrap:wrap;padding-top:24px;border-top:1px solid var(--border);">
           <div>
-            <div style="font-family:var(--sans);font-size:1.75rem;font-weight:800;color:var(--ink);line-height:1;" data-count="<?= max(1, $hopitauxCount) ?>" data-suffix="+">0</div>
+            <div style="font-family:var(--sans);font-size:1.75rem;font-weight:800;color:var(--ink);line-height:1;" data-count="<?= $hopitauxCount ?>"><?= $hopitauxCount ?></div>
             <div style="font-size:.75rem;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;margin-top:4px;font-weight:600;">Hôpitaux connectés</div>
           </div>
           <div style="width:1px;height:36px;background:var(--border);"></div>
           <div>
-            <div style="font-family:var(--sans);font-size:1.75rem;font-weight:800;color:var(--ink);line-height:1;" data-count="20000" data-suffix="+">0</div>
+            <div style="font-family:var(--sans);font-size:1.75rem;font-weight:800;color:var(--ink);line-height:1;" data-count="<?= $patientsCount ?>"><?= $patientsCount ?></div>
             <div style="font-size:.75rem;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;margin-top:4px;font-weight:600;">Patients enregistrés</div>
           </div>
           <div style="width:1px;height:36px;background:var(--border);"></div>
@@ -156,16 +158,6 @@ function hopitalImage($hopital, $imageMap) {
           </div>
         </div>
 
-        <!-- Floating badge - signature -->
-        <div style="position:absolute;top:-20px;right:-20px;background:white;border-radius:14px;padding:12px 16px;box-shadow:0 20px 40px rgba(15,23,42,.15);display:flex;align-items:center;gap:10px;animation:cueFloat 4s ease-in-out infinite;">
-          <div style="width:36px;height:36px;border-radius:10px;background:var(--g-emerald);color:white;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-emerald);">
-            <i class="fas fa-signature" style="font-size:.95rem;"></i>
-          </div>
-          <div>
-            <div style="font-size:.65rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-weight:600;">Signé par</div>
-            <div style="font-family:var(--sans);font-size:.85rem;font-weight:700;color:var(--ink);">Dr. F. Diallo</div>
-          </div>
-        </div>
 
         <!-- Floating badge - sécurité -->
         <div style="position:absolute;bottom:-20px;left:-20px;background:white;border-radius:14px;padding:12px 16px;box-shadow:0 20px 40px rgba(15,23,42,.15);display:flex;align-items:center;gap:10px;animation:cueFloat 4s ease-in-out infinite;animation-delay:-2s;">
